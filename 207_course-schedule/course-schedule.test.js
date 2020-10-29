@@ -54,3 +54,14 @@ test("example 8", () => {
   expect(canFinish(8, [[1,0],[2,6],[1,7],[5,1],[6,4],[7,0],[0,5]])).toEqual(false);
 });
 
+test("example 9", () => {
+  expect(canFinish(3, [[1, 0], [2, 0]])).toEqual(true);
+});
+
+test("example 10", () => {
+  expect(canFinish(4, [[0, 1], [0, 2], [1, 3], [3, 0]])).toEqual(false);
+});
+
+test("example 11", () => {
+  expect(canFinish(4, [[2,0],[1,0],[3,1],[3,2],[1,3]])).toEqual(false);
+});

@@ -1,45 +1,6 @@
 /*
 https://leetcode.com/problems/course-schedule/
-
-(Partial) Brute Force
-Time: O(N + N^2)
-Space: O(N)
 */
-
-
-function _canFinish(numCourses, prerequisites) {
-  //must be different number in each pair (no duplicates)
-
-  //if (numCourses === prerequisites.length) return false;
-  if (!prerequisites.length) return true;
-
-  let c = 0;
-  let map = {};
-
-  while(c < numCourses - 1) {
-    let currentCourse = prerequisites[c][0];
-    let preReqCourse = prerequisites[c][1];
-
-    if(map[currentCourse] === undefined) {
-      map[currentCourse] = preReqCourse;
-    }
-
-    c++;
-  }
-
-  for(let key in map) {
-    c = 0;
-    while(map.hasOwnProperty(key)) {
-      c++;
-
-      if(c === numCourses - 1) {
-        return true;
-      }
-    }
-  }
-
-  return false;
-}
 
 /*
 Solved using Graph adjacency list
@@ -62,61 +23,43 @@ function createGraphAdjacencyList(prerequisites) {
   
   return graph;
 }
-//key: 0, value: 1
-function isCycle(visited, value) {
 
-  for(let i = 0; i < value.length; i++) {
-    if(visited.hasOwnProperty(value[i])) {
-      return true;
+/*
+{
+  1: [0],
+  0: [1],
+}
+*/
+
+function hasCycle(graph, visited, node, courses) { //node: 1 courses: 1: -> node: 0 courses: 2 -> node: 1 course: 3
+  if(!visited.hasOwnProperty(node)) {
+    visited[node] = true; //{1: true, 0: true }
+  } else {
+    return true
+  }
+
+  let prereqs = graph[node]; //[1]
+  if(prereqs) {
+    for(let i = 0; i < prereqs.length; i++) {
+      return hasCycle(graph, visited, prereqs[i], courses + 1);
     }
   }
-  return false;
 
+  return false; 
 }
 
 function canFinish(numCourses, prerequisites) {
-  if(!prerequisites.length || prerequisites.length < numCourses) return true;
-
   const graph = createGraphAdjacencyList(prerequisites);
-  /*
-    0: [1, 2],
-    1: [2],
-  */
 
-  //Time: O(N^2)
-  //Space: O(N)
-  for(let key in graph) { //0
+  for(let key in graph) {
     const visited = {};
-    let queue = [ ...graph[key] ]; //[2]
-    visited[key] = true;  //{0: true, 1: true, 2: true}
-    
-    
-    while(queue.length) {
-      let first = queue.shift(); //2
-
-      if(!visited[first]) {
-        visited[first] = true;
-      } else {
-        return false;
-      }
-
-      if(!graph.hasOwnProperty(first)) {
-        break;
-      }
-
-      if(!isCycle(visited, graph[first])) {
-        queue = queue.concat(graph[first])
-      } else {
-        return false;
-      }
-    }
-
-    if(numCourses === Object.keys(visited).length) {
-      return true;
+    if(hasCycle(graph, visited, key, 1)){
+      return false;
     }
   }
 
-  return false;
+  return true;
 }
+
 
 module.exports = {canFinish};
