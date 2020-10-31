@@ -1,5 +1,5 @@
 /*
-#224 https://leetcode.com/problems/basic-calculator/
+#224 https://leetcode.com/problems/basic-calculator/ (verified)
 
 Time: O(N * P) N: length of string, P: number of pair of parenthesis
 Space: O(P)
@@ -35,8 +35,6 @@ function calculate(s) {
     '(': true,
     ')': true,
   }
-
-
 
   let summation = 0;
 
