@@ -83,7 +83,6 @@ function calculate(s) {
           }
   
           if(!op.length) {
-            i--;
             continue;
           }
   
@@ -105,8 +104,6 @@ function calculate(s) {
         }
       }
     }
-
-    
 
   }
 
