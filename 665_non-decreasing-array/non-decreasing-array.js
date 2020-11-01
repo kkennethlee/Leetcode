@@ -30,7 +30,6 @@ function checkPossibility(nums) {
 
       changed = true;
     }
-    start++;
   }
   return true;
 }
