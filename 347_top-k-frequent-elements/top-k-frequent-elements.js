@@ -3,7 +3,7 @@
 */
 
 /*
-Brute Force
+Brute Force w/ sorting
 Time: O(N + N + NLog(N) + N) -> O(NLog(N)) N: length of nums array
 Space: O(N + N ) -> O(N)
 */
@@ -26,7 +26,6 @@ function _topKFrequent(nums, k) {
 
   //sort the array
   arr.sort((a, b) => b[1] - a[1]);
-
   nums = [];
 
   for(let i = 0; i < k; i++) {
