@@ -55,3 +55,10 @@ test("example 3", () => {
   expect(listAndArrayMatch).toEqual(true);
 });
 
+test("example 4", () => {
+  let nodes = valuesToLinkedListNodes([1,2,3,4,-10]);
+  let removedNodes = removeZeroSumSublists(nodes[0]);
+  let listAndArrayMatch = matchLinkedListToArray(removedNodes, []);
+
+  expect(listAndArrayMatch).toEqual(true);
+});

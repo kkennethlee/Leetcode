@@ -4,9 +4,6 @@ Time: O(N) N: length of LinkedList
 Space: O(N) (callstack via recursion)
 */
 
-
-//1 --> 2 --> -3 --> 3 --> 1
-
 function removeZeroSumSublists(head) {
   let pointer = head;
 
