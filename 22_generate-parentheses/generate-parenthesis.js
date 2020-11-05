@@ -1,5 +1,5 @@
 /*
-https://leetcode.com/problems/generate-parentheses/
+#22 https://leetcode.com/problems/generate-parentheses/
 */
 
 //Partial Answer
@@ -7,7 +7,8 @@ function generateParenthesis(n) {
   let output = [];
   let counter = 0;
   let parenthesis = "";
-  
+  const pair = "()";
+  let prevPair = "";
 
   //"("
   for(let i = 1; i <= n; i++) { //n = 3
@@ -21,14 +22,8 @@ function generateParenthesis(n) {
       counter--;
     }
 
-    if(parenthesis.length === n * 2) {
-      //continue with more parenthesis;
-      // output.push(parenthesis);
-      // parenthesis = "";
-      //continue;
-    } else {
-
-      const leftOver = n - i; //2 - 1 = 1
+    if(parenthesis.length !== n * 2) {
+      const leftOver = n - i;
       for(let after = 0; after < leftOver; after++) {
         parenthesis += "(";
         counter++;
@@ -38,13 +33,20 @@ function generateParenthesis(n) {
         parenthesis += ")";
         counter--;
       }
+    }
 
+    if(i < n) {
+      prevPair += pair;
     }
 
     output.push(parenthesis);
     parenthesis = "";
 
-    
+  }
+
+  if(n >= 3) {
+    output.push( `(${prevPair})`  );
+    output.push( `()${prevPair}` );
   }
 
   return output;
