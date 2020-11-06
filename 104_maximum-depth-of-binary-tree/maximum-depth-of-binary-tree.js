@@ -1,8 +1,8 @@
 /*
 #104 https://leetcode.com/problems/maximum-depth-of-binary-tree/submissions (verified)
 
-Space: O(N) N: number of node
-Time: O(N)
+Time: O(2^N) N: number of node
+Space: O(N) N: depth
 */
 
 function maxDepth(root) {
