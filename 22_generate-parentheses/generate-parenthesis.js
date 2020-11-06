@@ -1,9 +1,11 @@
 /*
-#22 https://leetcode.com/problems/generate-parentheses/
+#22 https://leetcode.com/problems/generate-parentheses/ (verified)
+Time: O(2^n) (in reality, it will be less than 2^n because a lot of possibility will be eliminated early on)
+Space: O(2*N) -> O(N)
 */
 
 //Partial Answer
-function generateParenthesis(n) {
+function _generateParenthesis(n) {
   let output = [];
   let counter = 0;
   let parenthesis = "";
@@ -50,6 +52,30 @@ function generateParenthesis(n) {
   }
 
   return output;
+}
+
+function traverse(array, n, open, close, p) {
+
+  if(p.length === n*2) {
+    array.push(p);
+    return;
+  }
+
+  if(open > 0) {
+    traverse(array, n, open - 1, close, p += "(");
+    p = p.substr(0, p.length - 1); //remove char added by function above after done with recursion
+  }
+
+  if(open !== close) {
+    traverse(array, n, open, close - 1, p += ")");
+    p = p.substr(0, p.length - 1); //remove char added by function above after done with recursion
+  }
+}
+
+function generateParenthesis(n) {
+  const array = [];
+  traverse(array, n, n, n, "");
+  return array;
 }
 
 module.exports = {generateParenthesis};
