@@ -1,7 +1,15 @@
 const {generateParenthesis} = require('./generate-parenthesis');
 
 function checkForParenthesis(expected, generated) {
+  for(const gen of generated) {
+    if(expected.hasOwnProperty(gen)) {
+      delete expected[gen];
+    } else {
+      return false;
+    }
+  }
 
+  return (!Object.keys(expected).length);
 }
 
 test("n = 1", () => {
@@ -14,7 +22,8 @@ test("n = 1", () => {
     "()": true
   }
 
-  expect(generateParenthesis(1)).toEqual(["()"]);
+  let generated = generateParenthesis(1);
+  expect(checkForParenthesis(expected, generated)).toEqual(true);
 });
 
 test("n = 2", () => {
@@ -28,7 +37,8 @@ test("n = 2", () => {
     "(())": true,
   }
 
-  expect(generateParenthesis(2)).toEqual(["()()","(())"]);
+  let generated = generateParenthesis(2);
+  expect(checkForParenthesis(expected, generated)).toEqual(true);
 })
 
 test("n = 3", () => {
@@ -45,13 +55,6 @@ test("n = 3", () => {
     "()()()": true
   }
 
-  expect(generateParenthesis(3)).toEqual(["()(())", "(())()", "((()))","(()())","()()()"]);
-})
-
-test("n = 4", () => {
-  /**
-    Input: n = 4
-    Output: ["(((())))","((()()))","((())())","((()))()","(()(()))","(()()())","(()())()","(())(())","(())()()","()((()))","()(()())","()(())()","()()(())","()()()()"]
-   */
-  expect(generateParenthesis(4)).toEqual(["(((())))","((()()))","((())())","((()))()","(()(()))","(()()())","(()())()","(())(())","(())()()","()((()))","()(()())","()(())()","()()(())","()()()()"]);
+  let generated = generateParenthesis(3);
+  expect(checkForParenthesis(expected, generated)).toEqual(true);
 })
