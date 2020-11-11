@@ -1,3 +1,10 @@
+/*
+#863 https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/
+
+Time: O(2 * V + E) V: number of vertices, E: number of edges
+Space: O(2*D) D: level of depth
+*/
+
 function searchTarget(node, target, depth) {
 
   if(node.value === target) {
