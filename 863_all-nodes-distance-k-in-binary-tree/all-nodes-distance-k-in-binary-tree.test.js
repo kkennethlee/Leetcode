@@ -55,3 +55,11 @@ test("example 2", () => {
   let root = array[0];
   expect(distanceK(root, 1, 1)).toEqual([3, 0, 8]);
 });
+
+test("example 3", () => {
+  let array = [3,5,1,6,2,0,8,null,null,7,4];
+  createBinaryTreeFromArray(array);
+
+  let root = array[0];
+  expect(distanceK(root, 100, 3)).toEqual([]);
+});
