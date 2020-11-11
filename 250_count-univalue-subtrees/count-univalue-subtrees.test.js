@@ -54,3 +54,11 @@ test("example 2", () => {
   let root = array[0];
   expect(countUniversalSubtrees(root)).toEqual(5);
 });
+
+test("example 3", () => {
+  let array = [5, 4, 5, 4, 4, null, 5];
+  createBinaryTreeFromArray(array);
+
+  let root = array[0];
+  expect(countUniversalSubtrees(root)).toEqual(5);
+});
