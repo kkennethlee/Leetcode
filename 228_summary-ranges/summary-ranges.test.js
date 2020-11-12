@@ -9,7 +9,7 @@ Explanation: The ranges are:
 [7,7] --> "7"
 */
 test("example 1", () => {
-  expect(summaryRanges([0,1,2,4,5,7])).toEqual(["0->2","4->5","7"]);
+  expect(summaryRanges([0,1,2,4,5,7])).toEqual(["0->2","4->5","7"]); //['0->2', '4->5']
 });
 
 /*
@@ -22,7 +22,7 @@ Explanation: The ranges are:
 [8,9] --> "8->9"
 */
 test("example 2", () => {
-  expect(summaryRanges([0,2,3,4,6,8,9])).toEqual(["0","2->4","6","8->9"]);
+  expect(summaryRanges([0,2,3,4,6,8,9])).toEqual(["0","2->4","6","8->9"]); //['0', '2->4', '6']
 });
 
 /*
