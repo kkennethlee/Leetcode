@@ -1,13 +1,10 @@
 /*
-#49 https://leetcode.com/problems/count-univalue-subtrees
-
-Time: O(N) N: number of nodes
-Space: O(N)
+#49 https://leetcode.com/problems/count-univalue-subtrees (verified)
 */
 
 /*
 Brute force
-Time: O(N * NLog(N)  + N) -> O(N^2 * Log(N))
+Time: O(N * MLog(M)) N: number of words in array, M: length of longest word
 Space: O(N)
 */
 function groupAnagrams(strs) {
