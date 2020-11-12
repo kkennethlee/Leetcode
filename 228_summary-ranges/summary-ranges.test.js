@@ -56,3 +56,7 @@ test("example 6", () => {
 test("example 7", () => {
   expect(summaryRanges([0,9])).toEqual(["0","9"]);
 })
+
+test("example 8", () => {
+  expect(summaryRanges([-2147483648,-2147483647,2147483647])).toEqual(["-2147483648->-2147483647","2147483647"]);
+})

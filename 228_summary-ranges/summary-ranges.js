@@ -4,8 +4,8 @@ Time: O(N)
 Space: O(N)
 */
 
-
-function summaryRanges(nums) {
+//Solution with time limit esceeded
+function _summaryRanges(nums) {
   if(!nums.length) return [];
   if(nums.length === 1) return [nums[0] + ""];
 
@@ -53,5 +53,8 @@ function summaryRanges(nums) {
   return output;
 }
 
+function summaryRanges(nums) {
+  
+}
 
 module.exports = {summaryRanges}
