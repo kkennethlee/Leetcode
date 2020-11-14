@@ -1,5 +1,5 @@
 /*
-#53 https://leetcode.com/problems/maximum-subarray
+#53 https://leetcode.com/problems/maximum-subarray (verified)
 */
 
 /*
@@ -7,7 +7,7 @@ Brute Force Solution
 Time: O(N^2) N: length of nums
 Space; O(1)
 */
-function _maxSubArray(nums) {
+function __maxSubArray(nums) {
   if(!nums.length) return 0;
   if(nums.length === 1) return nums[0];
 

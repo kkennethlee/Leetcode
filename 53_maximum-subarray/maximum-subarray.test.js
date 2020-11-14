@@ -52,3 +52,7 @@ test("example 7", () => {
 test("example 8", () => {
   expect(maxSubArray([1,-2])).toEqual(1);
 });
+
+test("example 9", () => {
+  expect(maxSubArray([-2,-3,-1])).toEqual(-1);
+});
