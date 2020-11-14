@@ -1,7 +1,5 @@
 /*
 #297 https://leetcode.com/problems/serialize-and-deserialize-binary-tree
-Time: O(N) N: number of n
-Space: O(N)
 */
 
 class BinaryTreeNode {
@@ -22,6 +20,10 @@ class BinaryTreeNode {
   }
 }
 
+/*
+Time: O(V + E) V: number of vertices, E: number of edge
+Space: O(N): Number of nodes (for queue)
+*/
 function serialize(root) {
   let queue = [root];
   let array = [];
@@ -55,9 +57,13 @@ function serialize(root) {
 
   }
 
-  return array.splice(0, latestValue + 1);
+  return array.splice(0, latestValue + 1); //detach trailing "nulls"
 }
 
+/*
+Time: O(N) Number of nodes in a array/string representation
+Space: O(1):
+*/
 function deserialize(array) {
   if(!array.length) return null;
 
