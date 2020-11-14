@@ -1,5 +1,5 @@
 /*
-#349 https://leetcode.com/problems/intersection-of-two-arrays
+#349 https://leetcode.com/problems/intersection-of-two-arrays (verified)
 */
 
 /*
