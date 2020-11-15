@@ -1,20 +1,20 @@
 const {isCycle} = require('./circular-string-chains');
 
-test("example 1", () => {
-  /**
-    Input: arr = ["geek", "king"]
-    Output: True
-   */
-  expect(isCycle(["geek", "king"])).toEqual(true);
-})
+// test("example 1", () => {
+//   /**
+//     Input: arr = ["geek", "king"]
+//     Output: True
+//   */
+//   expect(isCycle(["geek", "king"])).toEqual(true);
+// })
 
-test("example 2", () => {
-  /**
-    Input: arr = ["for", "geek", "rig", "kaf"]
-    Output: True
-   */
-  expect(isCycle(["for", "geek", "rig", "kaf"])).toEqual(true);
-})
+// test("example 2", () => {
+//   /**
+//     Input: arr = ["for", "geek", "rig", "kaf"]
+//     Output: True
+//    */
+//   expect(isCycle(["for", "geek", "rig", "kaf"])).toEqual(true);
+// })
 
 test("example 3", () => {
   /**
