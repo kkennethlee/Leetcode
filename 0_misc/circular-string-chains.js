@@ -1,3 +1,8 @@
+/*
+Time: O(N^2) if we are visiting N other nodes per N node. If every words are unique, O(N)
+Space: O(3N) -> O(N) (call stack, graph data, visited hash table)
+*/
+
 function _isCycle(graph, visited, firstChar, numberOfWords) {
   
   const words = graph[firstChar];
@@ -5,7 +10,7 @@ function _isCycle(graph, visited, firstChar, numberOfWords) {
   for(const word of words) {
     if(visited[word]) continue;
     visited[word] = true;
-    
+
     const lastChar = word[word.length-1];
 
     if(graph.hasOwnProperty(lastChar)) {
