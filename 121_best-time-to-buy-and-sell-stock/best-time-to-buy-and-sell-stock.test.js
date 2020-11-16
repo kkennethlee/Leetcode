@@ -7,3 +7,7 @@ test("example 1", () => {
 test("example 2", () => {
   expect(maxProfit([7,6,4,3,1])).toEqual(0);
 });
+
+test("example 3", () => {
+  expect(maxProfit([7,1,5,3,0,6,4,7])).toEqual(7);
+})

@@ -1,5 +1,5 @@
 /*
-#121 https://leetcode.com/problems/best-time-to-buy-and-sell-stock
+#121 https://leetcode.com/problems/best-time-to-buy-and-sell-stock (verified)
 */
 
 /*
@@ -7,7 +7,7 @@ Brute force
 Time: O(N^2) N: length of prices
 Space: O(1)
 */
-function maxProfit(prices) {
+function _maxProfit(prices) {
 
   let buy = null;
   let max = 0;
@@ -18,6 +18,28 @@ function maxProfit(prices) {
       const profit = prices[j] - buy;
       max = Math.max(max, profit);
     }
+  }
+
+  return max;
+}
+
+/*
+Iterative strategy with Kadane's algorithm
+Time: O(N) N: length of prices
+Space: O(N)
+*/
+function maxProfit(prices) {
+  let diffs = [0];
+  for(let i = 1; i < prices.length; i++) {
+    const diff = prices[i] - prices[i-1];
+    diffs.push(diff);
+  }
+
+  let max = 0;
+
+  for(let i = 1; i < diffs.length; i++) {
+    diffs[i] = Math.max(diffs[i], diffs[i-1] + diffs[i]);
+    max = Math.max(max, diffs[i]);
   }
 
   return max;
