@@ -5,7 +5,7 @@
 /*
 Brute force
 Time: O(N^2) N: length of prices
-Space: O(N)
+Space: O(1)
 */
 function maxProfit(prices) {
 
