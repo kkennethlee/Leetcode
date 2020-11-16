@@ -5,7 +5,6 @@ Time: O(NLog(N) + N) N: number of intervals
 Space: O(1)
 */
 
-//[1,3],[5,8],[4,10],[20,25]
 function merge(intervals) {
   if(intervals.length <= 1) return intervals;
 
