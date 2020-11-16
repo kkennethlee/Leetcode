@@ -7,7 +7,7 @@ Brute force
 Time: O(N^2) N: length of prices
 Space: O(1)
 */
-function _maxProfit(prices) {
+function __maxProfit(prices) {
 
   let buy = null;
   let max = 0;
@@ -25,10 +25,10 @@ function _maxProfit(prices) {
 
 /*
 Iterative strategy with Kadane's algorithm
-Time: O(N) N: length of prices
+Time: O(2N) -> O(N) N: length of prices
 Space: O(N)
 */
-function maxProfit(prices) {
+function _maxProfit(prices) {
   let diffs = [0];
   for(let i = 1; i < prices.length; i++) {
     const diff = prices[i] - prices[i-1];
@@ -42,6 +42,22 @@ function maxProfit(prices) {
     max = Math.max(max, diffs[i]);
   }
 
+  return max;
+}
+
+/*
+Iterative strategy
+Time: O(N) N: length of prices
+Space: O(1)
+*/
+function maxProfit(prices) {
+  let max = 0;
+  let buyPoint = Infinity;
+
+  for(let i = 0; i < prices.length; i++) {
+    buyPoint = Math.min(buyPoint, prices[i]);
+    max = Math.max(max, prices[i] - buyPoint);
+  }
   return max;
 }
 
