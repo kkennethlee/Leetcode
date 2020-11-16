@@ -5,31 +5,25 @@ Time: O(NLog(N) + N) N: number of intervals
 Space: O(1)
 */
 
+//[1,3],[5,8],[4,10],[20,25]
 function merge(intervals) {
   if(intervals.length <= 1) return intervals;
 
   intervals.sort((a, b) => a[0] > b[0]);
 
-  const merged = [];
+  let merged = [ intervals[0] ];
 
   for(let i = 1; i < intervals.length; i++) {
-    const prevOpening = intervals[i-1][0];
-    const prevClosing = intervals[i-1][1];
 
     const currentOpening = intervals[i][0];
     const currentClosing = intervals[i][1];
 
-    if( prevClosing >= currentOpening ) {
-      if(prevClosing >= currentClosing) {
-        merged.push( [prevOpening, prevClosing] );
-      } else {
-        merged.push( [prevOpening, currentClosing] );
-      }
-    } else {
-      if(i === 1) {
-        merged.push( [prevOpening, prevClosing]);
-      }
+    //completely separate
+    if( currentOpening > merged[merged.length-1][1] ) {
       merged.push( [currentOpening, currentClosing] );
+    //merge
+    } else if( currentClosing > merged[merged.length-1][1] ) {
+      merged[merged.length-1][1] = currentClosing;
     }
   }
 
