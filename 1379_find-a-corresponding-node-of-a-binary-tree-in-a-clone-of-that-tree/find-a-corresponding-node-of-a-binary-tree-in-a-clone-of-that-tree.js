@@ -6,8 +6,6 @@ Space: O(D) D Depth of tree
 
 function getTargetCopy(original, cloned, target) {
 
-  //let counterpart = null;
-
   const traverse = (original, cloned) => {
     let left = null;
     let right = null;
