@@ -16,7 +16,7 @@ test("example 2", () => {
   expect(findKthLargest([3,2,3,1,2,4,5,5,6], 4)).toEqual(4);
 })
 
-test("example 2", () => {
+test("example 3", () => {
   /**
     Input: [-1,-1] and k = 2
     Output: -1
