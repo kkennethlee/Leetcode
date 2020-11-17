@@ -46,8 +46,8 @@ function _findKthLargest(nums, k) {
 
 /*
 Quick Select method
-Time: O(N + D) N: length of nums, D: difference between max number and min number
-Space: O(N)
+Time: O(N) N: length of nums
+Space: O(log(N))
 */
 function findKthLargest(nums, k) {
 
