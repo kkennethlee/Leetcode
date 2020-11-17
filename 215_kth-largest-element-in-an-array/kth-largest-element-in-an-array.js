@@ -1,5 +1,5 @@
 /*
-#215 https://leetcode.com/problems/kth-largest-element-in-an-array (verified)
+#215 https://leetcode.com/problems/kth-largest-element-in-an-nums (verified)
 */
 
 /*
@@ -53,24 +53,24 @@ function findKthLargest(nums, k) {
 
   let kthLargest = null;
 
-  const quickSelect = (array) => {
+  const quickSelect = (start, end) => {
     //1st element to the pivot, swap with last element
-    let temp = array[0];
-    array[0] = array[array.length - 1];
-    array[array.length - 1] = temp;
+    let temp = nums[start];
+    nums[start] = nums[end];
+    nums[end] = temp;
 
-    let pivotNumber = array[array.length-1];
+    let pivotNumber = nums[nums.length-1];
 
-    let partition = 0;
-    let index = 0;
+    let partition = start;
+    let index = start;
 
-    while(index < array.length - 1) {
+    while(index < end) {
 
-      if(pivotNumber > array[index]) {
+      if(pivotNumber > nums[index]) {
         //swap with beginning
-        let temp = array[partition];
-        array[partition] = array[index];
-        array[index] = temp;
+        let temp = nums[partition];
+        nums[partition] = nums[index];
+        nums[index] = temp;
         
         partition++;
       }
@@ -79,29 +79,28 @@ function findKthLargest(nums, k) {
     }
 
     //switch pivot index and partition index
-    temp = array[partition];
-    array[partition] = array[array.length-1];
-    array[array.length-1] = temp;
+    temp = nums[partition];
+    nums[partition] = nums[nums.length-1];
+    nums[nums.length-1] = temp;
 
 
     //divide and conquer here.
-    const kthIndex = array.length - k;
+    const kthIndex = nums.length - k;
 
     if(kthIndex > partition) {
-      //array ranging from partition + 1 and end of array;
-      let copy = array.slice(partition + 1, array.length);
-      quickSelect(copy);
+      //nums ranging from partition + 1 and end of nums;
+      quickSelect(partition + 1, end);
     } else if(kthIndex < partition) {
-      let copy = array.slice(0, partition + 1);
-      quickSelect(copy);
+      quickSelect(start, partition);
     } else {
-      kthLargest = array[kthIndex];
+      kthLargest = nums[kthIndex];
     }
 
   }
 
+
   if(nums.length >= k) {
-    quickSelect(nums);
+    quickSelect(0, nums.length - 1);
   }
 
   return kthLargest;
