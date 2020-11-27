@@ -1,5 +1,5 @@
 /*
-#973 https://leetcode.com/problems/k-closest-points-to-origin
+#973 https://leetcode.com/problems/k-closest-points-to-origin (verified)
 */
 
 
@@ -14,7 +14,7 @@ const getDistance = (point) => {
 
 /*
 Brute force solution w/ Sort
-Time: O(N*Log(N)) number of points in coordinates
+Time: O(N*Log(N)) N: number of points in coordinates
 Space: O(1);
 */
 function _kClosest(points, K) {
@@ -26,8 +26,8 @@ function _kClosest(points, K) {
 
 /*
 Solution using Heap
-Time: O(N*Log(K))
-Space: O(N + K);
+Time: O(K*Log(N)) Sifting through array takes Log(N), Pop K times
+Space: O(N);
 */
 function kClosest(points, K) {
   const distances = new Heap();
