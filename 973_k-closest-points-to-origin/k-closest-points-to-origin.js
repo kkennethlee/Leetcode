@@ -108,14 +108,37 @@ class Heap {
 
     //heap down
     let index = 0;
-    while((this.hasLeftChild(index) && this.arr[index][0] > this.arr[this.leftChild(index)][0]) || 
-          (this.hasRightChild(index) && this.arr[index][0] > this.arr[this.rightChild(index)][0])) {
-      if(this.arr[index][0] > this.arr[this.leftChild(index)][0]) {
-        this.swap(index, this.leftChild(index));
-        index = this.leftChild(index);
-      } else if(this.arr[index][0] > this.arr[this.rightChild(index)][0]) {
-        this.swap(index, this.rightChild(index));
-        index = this.rightChild(index);
+
+    while(this.hasLeftChild(index) || this.hasRightChild(index)) {
+      const l = this.hasLeftChild(index);
+      const r = this.hasRightChild(index);
+      const lIndex = this.leftChild(index);
+      const rIndex = this.rightChild(index);
+
+      if(l && r) {
+        if(this.arr[lIndex][0] <= this.arr[rIndex][0] && this.arr[index][0] >= this.arr[lIndex][0]) {
+          this.swap(index, lIndex);
+          index = lIndex;
+        } else if(this.arr[lIndex][0] > this.arr[rIndex][0] && this.arr[index][0] > this.arr[rIndex][0]) {
+          this.swap(index, rIndex);
+          index = rIndex;
+        } else {
+          break;
+        }
+      } else if(l) {
+        if(this.arr[index][0] >= this.arr[lIndex][0]) {
+          this.swap(index, lIndex);
+          index = lIndex;
+        } else {
+          break;
+        }
+      } else if(r) {
+        if(this.arr[index][0] > this.arr[rIndex][0]) {
+          this.swap(index, rIndex);
+          index = rIndex;
+        } else {
+          break;
+        }
       }
     }
 
