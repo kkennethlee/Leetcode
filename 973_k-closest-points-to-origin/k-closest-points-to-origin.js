@@ -27,56 +27,99 @@ function _kClosest(points, K) {
 /*
 Solution using Heap
 Time: O(N*Log(K))
-Space: O(1);
+Space: O(N + K);
 */
 function kClosest(points, K) {
-  const distances = [];
-  const coordinates = [];
-  coordinates.push(points[0]);
-  distances.push(getDistance(points[0]));
+  const distances = new Heap();
 
-  for(let i = 1; i < points.length; i++) {
-    minHeapify(coordinates, distances, points[i]);
+  for(let i = 0; i < points.length; i++) {
+    const point = points[i];
+    const d = getDistance(point);
+    distances.insert([d, i]);
   }
 
-  return distances;
+  const coordinates = [];
+  for(let i = 0; i < K; i++) {
+    const removed = distances.remove();
+    coordinates.push(points[removed[1]]);
+  }
+
+  return coordinates;
 }
 
-function minHeapify(coordinates, distances, points) {
-  const d = getDistance(points);
-  coordinates.push(points)
-  distances.push(d);
+class Heap {
+  constructor() {
+    this.arr = [];
+  }
 
-  let index = coordinates.length -1;
-  let loop = true;
-  let parentIndex = null;
-  while(loop) {
+  parent(i) {
+    return Math.floor((i - 1) / 2);
+  }
 
-    if(index <= 2) {
-      parentIndex = 0;
-    } else if(index > 2) {
-      parentIndex = Math.floor((index-1)/2);
+  hasParent(i) {
+    return (i > 0 && i < this.arr.length) ? true : false;
+  }
+
+  leftChild(i) {
+    return 2 * i + 1;
+  }
+
+  hasLeftChild(i) {
+    const child = this.leftChild(i);
+    if(child >= 0 && child <= this.arr.length - 1) {
+      return true;
     }
+    return false;
+  }
 
-    if(coordinates[index] < coordinates[parentIndex]) {
-      let temp = coordinates[index];
-      coordinates[index] = coordinates[parentIndex];
-      coordinates[parentIndex] = temp;
+  rightChild(i) {
+    return 2 * i + 2;
+  }
 
-      temp = distances[index];
-      distances[index] = distances[parentIndex];
-      distances[parentIndex] = temp;
+  hasRightChild(i) {
+    const child = this.rightChild(i);
+    if(child >= 0 && child <= this.arr.length - 1) {
+      return true;
+    }
+    return false;
+  }
 
-      index = parentIndex;
+  swap(i1, i2) {
+    const temp = this.arr[i1];
+    this.arr[i1] = this.arr[i2];
+    this.arr[i2] = temp;
+  }
 
-      if(index === 0) {
-        loop = false;
+  insert(n) {
+    this.arr.push(n);
+    
+    //heap up
+    let index = this.arr.length - 1;
+    while(this.hasParent(index) && this.arr[this.parent(index)][0] > this.arr[index][0]) {
+      this.swap(this.parent(index), index);
+      index = this.parent(index);
+    }
+  }
+
+  remove() {
+    const toRemove = this.arr[0];
+    const popped = this.arr.pop();
+    this.arr[0] = popped;
+
+    //heap down
+    let index = 0;
+    while((this.hasLeftChild(index) && this.arr[index][0] > this.arr[this.leftChild(index)][0]) || 
+          (this.hasRightChild(index) && this.arr[index][0] > this.arr[this.rightChild(index)][0])) {
+      if(this.arr[index][0] > this.arr[this.leftChild(index)][0]) {
+        this.swap(index, this.leftChild(index));
+        index = this.leftChild(index);
+      } else if(this.arr[index][0] > this.arr[this.rightChild(index)][0]) {
+        this.swap(index, this.rightChild(index));
+        index = this.rightChild(index);
       }
-
-    } else {
-      loop = false;
     }
 
+    return toRemove;
   }
 
 }
