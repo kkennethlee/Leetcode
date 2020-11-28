@@ -4,7 +4,7 @@
 
 /*
 Recursive Method
-Time: O(N)
+Time: O(2^N)
 Space: O(N)
 */
 function _fib(N) {
