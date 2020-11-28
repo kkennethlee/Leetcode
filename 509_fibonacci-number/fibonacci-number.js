@@ -15,7 +15,7 @@ function _fib(N) {
 }
 
 /*
-Iterative Method
+Iterative Method w/ memoization
 Time: O(N)
 Space: O(N)
 */
