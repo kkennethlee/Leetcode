@@ -4,7 +4,7 @@
 
 /*
 Brute force method
-Time: O(N^2) N: length of input
+Time: O(N^2) N: number of nums
 Space: O(1)
 */
 function _subarraySum(num, k) {
@@ -29,41 +29,29 @@ function _subarraySum(num, k) {
   return count;
 }
 
-function subarraySum(num, k) {
-  let count = 0;
+/*
+iterative method
+Time: O(N) N: number of nums
+Space: O(N)
+*/
+function subarraySum(nums, k) {
   let sum = 0;
-
-  let start = 0;
-  for(let end = 0; end < num.length; end++) {
-    sum += num[end];
-
-    if(end > start) {
-
-      while(sum > k) {
-        sum -= num[start];
-        start++;
-      }
+  let result = 0;
+  let hash = {0: 1}
+      
+  for (let i = 0; i < nums.length; i++) {
+    sum += nums[i];
+    if (hash[sum - k]) {
+        result += hash[sum - k];
     }
-  
-    if(sum === k) {
-      count++;
+    
+    if(!hash.hasOwnProperty(sum)) {
+      hash[sum] = 0;
     }
+    hash[sum]++;
   }
-
-  sum -= num[start];
-  start++;
-
-  for(; start < num.length; start++) {
-    if(sum === k) {
-      count++;
-    }
-
-    sum -= num[start];
-  }
-
-  return count;
+      
+  return result;
 }
-
-
 
 module.exports = {subarraySum}
