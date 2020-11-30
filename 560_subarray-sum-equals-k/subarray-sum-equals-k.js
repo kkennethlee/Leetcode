@@ -1,5 +1,5 @@
 /*
-#560 https://leetcode.com/problems/subarray-sum-equals-k
+#560 https://leetcode.com/problems/subarray-sum-equals-k (verified)
 */
 
 /*
