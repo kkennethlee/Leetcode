@@ -1,147 +1,84 @@
 /*
-https://leetcode.com/problems/find-all-anagrams-in-a-string
+#438 https://leetcode.com/problems/find-all-anagrams-in-a-string (verified)
 */
 
-//bruteforce
-//Space: O(2P) -> O(S*P)
-//Time: O(P + S*P) -> O(S*P)
+/*
+Brute force method using sort
+Time: O(PLog(P) + S * PLog(P))
+Space: O(P)
+*/
+
 function _findAnagrams(s, p) {
 
-  const outputs = [];
-  let pHash = {};
-  for(let i = 0; i < p.length; i++) {
+  p = p.split('').sort().join('');
 
-    if(!pHash[p[i]]) {
-      pHash[p[i]] = 0;
+  let start = 0;
+  let end = p.length - 1;
+
+  let substring = null;
+  
+  let output = [];
+
+  while(end < s.length) {
+
+    substring = s.substr(start, p.length).split('').sort().join('');
+
+    if(substring === p) {
+      output.push(start);
     }
-    pHash[p[i]]++;
+
+    start++;
+    end++;
   }
 
-
-  for(let outer = 0; outer < s.length; outer++) {
-    let sHash = {};
-
-    for(let inner = 0; inner < p.length; inner++) {
-      //sHash[inner]
-      if(!sHash[s[inner + outer]]) {
-        sHash[s[inner + outer]] = 0;
-      }
-      sHash[s[inner + outer]]++;
-    }
-
-    //compare the two hash tables if they are equal.
-    let isEqual = true;
-    for(let key in pHash) {
-      if(pHash[key] !== sHash[key]) {
-        isEqual = false;
-        break;
-      }
-    }
-
-    if(isEqual) {
-      outputs.push(outer);
-    }
-
-  }
-
-  return outputs;
+  return output;
 }
+
 /*
-function findAnagrams(s, p) {
-  let map = {},
-    answer = [];
-  // sliding window
-  for (let i = 0; i < p.length; i++) {
-    map[p[i]] = (map[p[i]] || 0) + 1;
-  }
-
-  // when charCount equals 0, count --
-  let count = Object.keys(map).length;
-
-  let left = 0,
-    right = 0;
-  while (right < s.length) {
-    if (map[s[right]] !== undefined) {
-      map[s[right]]--;
-      if (map[s[right]] === 0) {
-        count--;
-      }
-    }
-    right++;
-    while (count === 0) {
-      if (map[s[left]] !== undefined) {
-        map[s[left]]++;
-        if (map[s[left]] > 0) {
-          count++;
-        }
-      }
-      if (right - left === p.length) {
-        answer.push(left);
-      }
-      left++;
-    }
-  }
-  return answer;
-}
+Iterative solution using hash
+Time: O(N) N: length of string
+Space: O(26)
 */
-//sliding window
 function findAnagrams(s, p) {
-  //"cbacebabacd", "abc"
-  const outputs = [];
-  let hash = {};
-
-  //if p = "abc", create 2 object of {a: 1, b: 1, c: 1}
-  for(let i = 0; i < p.length; i++) {
-    if(!hash[p[i]]) {
-      hash[p[i]] = 0;
+  
+  const getAlphabetIndex = (char) => {
+    const code = char.charCodeAt(0);
+    if(code >= 97 && code <= 122) {
+      return char.charCodeAt(0)-97;
     }
-    hash[p[i]]++;
   }
 
-  let leftPointer = 0;
-  let rightPointer = 0;
-
-  //diff is the difference between leftPointer and rightPointer;
-  let diff = 0;
-
-  while(rightPointer < s.length) {
-    
-    const char = s[rightPointer];
-
-    if(hash[char] && hash[char] > 0) {
-      hash[char]--;
-      if(hash[char] === 0) {
-        delete hash[char];
-      }
-    }
-    
-
-    //check the hash for the remaining key/value.
-    //If none exist, then it's a full anagram
-    let keyLength = Object.keys(hash).length;
-    if(keyLength === 0) {
-      rightPointer += diff;
-      outputs.push(leftPointer);
-    }
-
-
-
-    //catch leftPointer up to the rightPointer
-    //restore the hash
-    while(leftPointer <= rightPointer) {//L: 0, R: 2
-      if(pHash.hasOwnProperty(s[leftPointer])) {
-        if(!hash[s[leftPointer]]) {
-          hash[s[leftPointer]] = 0
-        }
-        hash[s[leftPointer]]++;
-      }
-
-      leftPointer++;
-    }
-    leftPointer--;
+  const hash = {};
+  let indexes = new Array(26).fill(0);
+  for(const char of p) {
+    const code = getAlphabetIndex(char);
+    indexes[code]++;
   }
 
-  return outputs;
+  hash[indexes] = true;
+
+  indexes = new Array(26).fill(0);
+
+  const output = [];
+  let start = 0;
+  for(let end = 0; end < s.length; end++) {
+    const endcode = getAlphabetIndex(s[end]);
+    indexes[endcode]++;
+    if(end >= p.length - 1) {
+      if(hash.hasOwnProperty(indexes)) {
+        output.push(start);
+      }
+
+      let startcode = getAlphabetIndex(s[start]);
+
+      indexes[startcode]--;
+      start++;
+    }
+  }
+
+  return output;
+
 }
+
 
 module.exports = {findAnagrams};
