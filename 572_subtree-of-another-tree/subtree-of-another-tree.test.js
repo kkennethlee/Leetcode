@@ -116,3 +116,25 @@ test("example 4", () => {
   
   expect(isSubtree(s, t)).toEqual(true);
 })
+
+test("example 5", () => {
+  const s = new BinaryTreeNode(1);
+  const left = s.insertLeft(2);
+  const right = s.insertRight(3);
+
+  const t = new BinaryTreeNode(2);
+  t.insertLeft(3);
+  
+  expect(isSubtree(s, t)).toEqual(false);
+})
+
+test("example 6", () => {
+  const s = new BinaryTreeNode(1);
+  const left = s.insertLeft(2);
+  const right = s.insertRight(3);
+
+  const t = new BinaryTreeNode(1);
+  t.insertLeft(2);
+  
+  expect(isSubtree(s, t)).toEqual(false);
+})
