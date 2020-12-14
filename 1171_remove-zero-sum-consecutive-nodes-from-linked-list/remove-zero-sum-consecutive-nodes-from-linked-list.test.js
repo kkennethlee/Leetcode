@@ -20,8 +20,12 @@ function valuesToLinkedListNodes(values) {
 }
 
 function matchLinkedListToArray(head, array) {
+  if(head === null && !array.length) return true;
+  if(head === null && array.length) return false;
+
   for(let i = 0; i < array.length; i++) {
-    if( head && array[i] !== head.value ) return false;
+    if(!head && i < array.length) return false;
+    if(array[i] !== head.value ) return false;
     head = head.next;
   }
 
