@@ -40,30 +40,29 @@ function isNumber(s) {
         return false;
       }
 
+      //check for decimals
+      if(decimalAllowed && !hasDecimal && ch === '.') {
+        hasDecimal = true;
+      } else if(decimalAllowed && hasDecimal && ch === '.') {
+        return false;
+      } else if(!decimalAllowed && ch === '.') {
+        return false;
+      }
+
       if(pointer === 0) {
         //check for first character
         if(digits.hasOwnProperty(ch) || ch === '-' || ch === '+') {
           hasSign = true;
           hasNumber = true;
-        } else if(ch === '.' || ch === 'e') {
+        } else if(ch === 'e') {
           return false;
-        } else {
-          //first character is digit
-          hasSign = true;
-        }
+        } 
       } else {
         //check for multiple sign
         if(hasSign && (ch === '-' || ch === '+')) {
           return false;
-        }
-
-        //check for decimals
-        if(decimalAllowed && !hasDecimal && ch === '.') {
-          hasDecimal = true;
-        } else if(decimalAllowed && hasDecimal && ch === '.') {
-          return false;
-        } else if(!decimalAllowed && ch === '.') {
-          return false;
+        } else if(digits.hasOwnProperty(ch)) {
+          hasNumber = true;
         }
       }
 
