@@ -44,38 +44,58 @@ test("example 11", () => {
   expect(isNumber("53.5e93")).toEqual(true);
 });
 
-test("example 11", () => {
+test("example 12", () => {
   expect(isNumber("--6")).toEqual(false);
 });
 
-test("example 11", () => {
+test("example 13", () => {
   expect(isNumber("-+3")).toEqual(false);
 });
 
-test("example 11", () => {
+test("example 14", () => {
   expect(isNumber("95a54e53")).toEqual(false);
 });
 
-test("example 12", () => {
+test("example 15", () => {
   expect(isNumber("1 ")).toEqual(true);
 });
 
-test("example 13", () => {
+test("example 16", () => {
   expect(isNumber(" ")).toEqual(false);
 });
 
-test("example 14", () => {
+test("example 17", () => {
   expect(isNumber(".1")).toEqual(true);
 });
 
-test("example 15", () => {
+test("example 18", () => {
   expect(isNumber(". 1")).toEqual(false);
 });
 
-test("example 16", () => {
+test("example 19", () => {
   expect(isNumber(".1 1")).toEqual(false);
 });
 
-test("example 17", () => {
+test("example 20", () => {
   expect(isNumber(" 1")).toEqual(true);
+});
+
+test("example 21", () => {
+  expect(isNumber("- 1")).toEqual(false);
+});
+
+test("example 22", () => {
+  expect(isNumber("1 .")).toEqual(false);
+});
+
+test("example 23", () => {
+  expect(isNumber(".-4")).toEqual(false);
+});
+
+test("example 24", () => {
+  expect(isNumber("-.4")).toEqual(true);
+});
+
+test("example 25", () => {
+  expect(isNumber("96 e5")).toEqual(false);
 });

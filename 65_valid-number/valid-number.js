@@ -1,5 +1,5 @@
 /*
-#65 https://leetcode.com/problems/valid-number
+#65 https://leetcode.com/problems/valid-number (verified)
 Time: O(N) N: length of string
 Space: O(N)
 */
@@ -41,12 +41,18 @@ function isNumber(s) {
         return false;
       }
 
+      if(hasIllegalSpace && ch !== ' ') return false;
+
       //check for white space
       if((hasNumber || hasDecimal || hasSign) && ch === ' ') {
         hasIllegalSpace = true;
       }
       
       //check for signs
+      
+      if(hasDecimal && (ch === '-' || ch === '+')) {
+        return false;
+      }
       if(!hasSign && (ch === '-' || ch === '+')) {
         hasSign = true;
       } else if(hasSign && (ch === '-' || ch === '+')) {
@@ -93,6 +99,8 @@ function isNumber(s) {
   if(array.length === 1) {
     return validateNumber(array[0], true);
   } else if(array.length === 2) {
+    if(array[0][array[0].length - 1] === ' ' || array[1][0] === ' ') return false;
+
     return validateNumber(array[0], true) && validateNumber(array[1], false);
   }
 }
