@@ -31,12 +31,25 @@ function isNumber(s) {
     let hasSign = false;
     let hasNumber = false;
     let hasDecimal = false;
+    let hasIllegalSpace = false;
 
 
     while(pointer < number.length) {
       const ch = number[pointer];
       
       if(!digits.hasOwnProperty(ch) && !signs.hasOwnProperty(ch)) {
+        return false;
+      }
+
+      //check for white space
+      if((hasNumber || hasDecimal || hasSign) && ch === ' ') {
+        hasIllegalSpace = true;
+      }
+      
+      //check for signs
+      if(!hasSign && (ch === '-' || ch === '+')) {
+        hasSign = true;
+      } else if(hasSign && (ch === '-' || ch === '+')) {
         return false;
       }
 
@@ -49,21 +62,13 @@ function isNumber(s) {
         return false;
       }
 
-      if(pointer === 0) {
-        //check for first character
-        if(digits.hasOwnProperty(ch) || ch === '-' || ch === '+') {
-          hasSign = true;
-          hasNumber = true;
-        } else if(ch === 'e') {
-          return false;
-        } 
-      } else {
-        //check for multiple sign
-        if(hasSign && (ch === '-' || ch === '+')) {
-          return false;
-        } else if(digits.hasOwnProperty(ch)) {
-          hasNumber = true;
-        }
+      //check for number
+      if(digits.hasOwnProperty(ch)) {
+        //check for space
+        if(hasIllegalSpace) return false;
+        
+        hasSign = true;
+        hasNumber = true;
       }
 
       pointer++;

@@ -67,3 +67,15 @@ test("example 13", () => {
 test("example 14", () => {
   expect(isNumber(".1")).toEqual(true);
 });
+
+test("example 15", () => {
+  expect(isNumber(". 1")).toEqual(false);
+});
+
+test("example 16", () => {
+  expect(isNumber(".1 1")).toEqual(false);
+});
+
+test("example 17", () => {
+  expect(isNumber(" 1")).toEqual(true);
+});
