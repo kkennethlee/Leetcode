@@ -5,7 +5,9 @@ Space: O(1)
 */
 
 function rotateRight(head, k) {
-  
+  if(k === 0) return head;
+  if(!head) return head;
+
   let pointer = head;
   let listLength = 0;
 
@@ -14,8 +16,11 @@ function rotateRight(head, k) {
     pointer = pointer.next;
   }
 
-  if(k > listLength) {
+  if(listLength <= 1) return head;
+
+  if(k >= listLength) {
     k = k % listLength;
+    if(k === 0) return head;
   }
 
   pointer = head;

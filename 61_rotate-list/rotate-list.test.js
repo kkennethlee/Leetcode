@@ -51,10 +51,10 @@ test("example 2", () => {
   expect(listAndArrayMatch).toEqual(true);
 });
 
-// test("example 3", () => {
-//   let nodes = valuesToLinkedListNodes([0,1,2]);
-//   let rotatedList = rotateRight(nodes[0], 5);
-//   let listAndArrayMatch = matchLinkedListToArray(rotatedList, [0,1,2]);
+test("example 3", () => {
+  let nodes = valuesToLinkedListNodes([1,2,3,4,5]);
+  let rotatedList = rotateRight(nodes[0], 10);
+  let listAndArrayMatch = matchLinkedListToArray(rotatedList, [1,2,3,4,5]);
 
-//   expect(listAndArrayMatch).toEqual(true);
-// });
+  expect(listAndArrayMatch).toEqual(true);
+});
