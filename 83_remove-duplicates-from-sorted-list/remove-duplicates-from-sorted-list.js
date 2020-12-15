@@ -1,4 +1,8 @@
-
+/*
+#83 https://leetcode.com/problems/remove-duplicates-from-sorted-list (verified)
+Time: O(N) N: length of list
+Space: O(1)
+*/
 
 function deleteDuplicates(head) {
   if(!head) return head;
