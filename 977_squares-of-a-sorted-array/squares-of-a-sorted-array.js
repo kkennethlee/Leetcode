@@ -18,7 +18,7 @@ function _sortedSquares(nums) {
 /*
 Iterative Method
 Time: O(N) N: number of nums
-Space: O(N)
+Space: O(1)
 */
 function sortedSquares(nums) {
   let squares = [];
