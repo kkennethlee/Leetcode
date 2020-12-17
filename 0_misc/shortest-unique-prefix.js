@@ -1,5 +1,8 @@
 /*
 https://www.interviewbit.com/problems/shortest-unique-prefix (verified)
+Time: O(N * M) N: number of words, M: length of unique prefix
+Space: O(N * M)
+
 */
 
 class Trie {
