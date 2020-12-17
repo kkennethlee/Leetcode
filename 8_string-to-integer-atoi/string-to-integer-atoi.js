@@ -4,7 +4,7 @@ Time: O(N) N: length of string
 Space: O(1)
 */
 
-function myAtoi(s) {
+function _myAtoi(s) {
 
   let hasInteger = false;
   let digitPlacement = 0;
@@ -73,6 +73,21 @@ function myAtoi(s) {
   }
 
   return integer;
+}
+
+function myAtoi(s) {
+  const integer = parseInt(s);
+
+  const INT_MIN = 2 ** 31 * -1;
+  const INT_MAX = 2 ** 31;
+
+  if(integer < INT_MIN) {
+    return INT_MIN;
+  } else if(integer >= INT_MAX) {
+    return INT_MAX - 1;
+  }
+
+  return parseInt(s) || 0;
 }
 
 module.exports = {myAtoi}
