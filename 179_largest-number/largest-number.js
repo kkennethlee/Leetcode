@@ -1,5 +1,5 @@
 /*
-https://www.interviewbit.com/problems/shortest-unique-prefix (verified)
+#179 https://leetcode.com/problems/largest-number (verified)
 Time: O(N Log(N)) N: length of nums
 Space: O(1)
 */
