@@ -1,6 +1,6 @@
 /*
 #51 https://leetcode.com/problems/n-queens (verified)
-Time: O(N!) N: number of queens. We are basically trying out every possible combinations
+Time: O(N!) N: number of queens. Basically choose 1 path and eliminate any possible dead end to limit traversal
 Space: O(N^2) call stack and copy of row to check valid placement of Queen
 */
 
