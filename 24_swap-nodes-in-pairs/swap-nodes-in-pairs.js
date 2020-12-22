@@ -1,12 +1,12 @@
 /*
-#24 https://leetcode.com/problems/swap-nodes-in-pairs
+#24 https://leetcode.com/problems/swap-nodes-in-pairs (verified)
 Time: O(N) N: length of list
 Space: O(1)
 */
 
 function swapPairs(head) {
   let first = head;
-  
+
   if(!first || !first.next) return head;
 
   let second = head.next;
