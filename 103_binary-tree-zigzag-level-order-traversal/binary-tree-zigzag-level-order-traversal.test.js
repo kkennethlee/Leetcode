@@ -42,5 +42,3 @@ test("example 3", () => {
 
   expect(zigzagLevelOrder(root)).toEqual([[1], [3, 2], [4, 5]]);
 })
-
-//[0,2,4,1,null,3,-1,5,1,null,6,null,8]
