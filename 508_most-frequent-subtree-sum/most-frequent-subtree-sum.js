@@ -1,5 +1,5 @@
 /*
-#1325 https://leetcode.com/problems/most-frequent-subtree-sum (verified)
+#508 https://leetcode.com/problems/most-frequent-subtree-sum (verified)
 Time: O(V + E) V: number of vertices, E: number of edges (linear)
 Space: O(N + D) D: number of call stack, N: number of nodes
 */
