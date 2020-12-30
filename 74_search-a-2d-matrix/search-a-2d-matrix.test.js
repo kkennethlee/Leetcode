@@ -15,3 +15,11 @@ test("example 2", () => {
 test("example 3", () => {
   expect(searchMatrix([[1,3,5,8],[10,11,15,16],[24,27,30,31]], 10)).toEqual(true);
 });
+
+test("example 4", () => {
+  expect(searchMatrix([[1]], 10)).toEqual(false);
+});
+
+test("example 5", () => {
+  expect(searchMatrix([[1]], 1)).toEqual(true);
+});
