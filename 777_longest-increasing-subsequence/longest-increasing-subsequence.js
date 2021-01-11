@@ -1,5 +1,5 @@
 /*
-#777 https://leetcode.com/problems/longest-increasing-subsequence
+#777 https://leetcode.com/problems/longest-increasing-subsequence (verified)
 */
 
 /*
