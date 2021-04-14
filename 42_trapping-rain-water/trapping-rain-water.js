@@ -79,15 +79,16 @@ Space: O(1)
 */
 
 function trap(height) {
-  //iterate from left to right, calculate the possible water level in respect to maxLeft
   let maxLeft = 0;
   let maxRight = 0;
   let area = 0;
 
+  //set two pointers
   let p1 = 0;
   let p2 = height.length - 1;
 
   while(p1 < p2) {
+    //move the pointer with lowest number
     if (height[p1] <= height[p2]) {
       //calculate p1
       maxLeft = Math.max(maxLeft, height[p1]);
