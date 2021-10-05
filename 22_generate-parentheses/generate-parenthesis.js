@@ -4,51 +4,36 @@ Time: O(2^n) (in reality, it will be less than 2^n because a lot of possibility 
 Space: O(2*N) -> O(N)
 */
 
-//Partial Answer
-function _generateParenthesis(n) {
-  let output = [];
-  let counter = 0;
-  let parenthesis = "";
-  const pair = "()";
-  let prevPair = "";
+function generateParenthesisIterative(n) {
+  const output = [];
 
-  //"("
-  for(let i = 1; i <= n; i++) { //n = 3
-    for(let before = 0; before < i; before++) {
-      parenthesis += "(";
-      counter++;
+  const queue = [{p: '', open: 0, close: 0}];
+
+  while (queue.length) {
+    const current = queue.shift();
+
+    if (current.open === n && current.close === n) {
+      output.push(current.p);
+    } 
+
+    // add open parenthesis
+    if ( current.open < n ) {
+      const copy = {...current};
+      copy.open++; 
+      copy.p += '(';
+
+      queue.push(copy);
     }
 
-    for(let close = 0; close < i; close++) {
-      parenthesis += ")";
-      counter--;
+    // add closing parenthesis
+    if ( current.close < n && current.open > current.close) {
+      const copy = {...current};
+      copy.close++;
+      copy.p += ')';
+
+      queue.push(copy);
     }
 
-    if(parenthesis.length !== n * 2) {
-      const leftOver = n - i;
-      for(let after = 0; after < leftOver; after++) {
-        parenthesis += "(";
-        counter++;
-      }
-
-      for(let close = 0; close < leftOver; close++) {
-        parenthesis += ")";
-        counter--;
-      }
-    }
-
-    if(i < n) {
-      prevPair += pair;
-    }
-
-    output.push(parenthesis);
-    parenthesis = "";
-
-  }
-
-  if(n >= 3) {
-    output.push( `(${prevPair})`  );
-    output.push( `()${prevPair}` );
   }
 
   return output;
