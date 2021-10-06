@@ -4,8 +4,26 @@ Time: O(3^N) N: number of digits. There is mostly 3 characters per digits
 Space: O(N)
 */
 
-function letterCombinations(digits) {
-  if(!digits.length) return [];
+function _findLetterCombinations(digits, output, letters, current = "", digitIndex = 0) {
+  if (digitIndex === digits.length) {
+    output.push(current);
+    return;
+  }
+
+  const n = parseInt(digits[digitIndex]);
+  const characterArray = letters[n];
+
+  for (let i = 0; i < characterArray.length; i++) {
+    current += characterArray[i];
+    _findLetterCombinations(digits, output, letters, current, digitIndex + 1);
+    //remove last char of current
+    current = current.slice(0, -1);
+  }
+
+}
+
+function letterCombinationsRecursive(digits) {
+  if (!digits.length) return [];
 
   const letters = [
     null,
@@ -20,29 +38,55 @@ function letterCombinations(digits) {
     ["w","x","y","z"]
   ];
 
-  const combinations = [];
-  let word = "";
+  const output = [];
+  _findLetterCombinations(digits, output, letters);
+  return output;
+}
 
-  const traverse = (letterIndex) => {
 
-    if(word.length === digits.length) {
-      combinations.push(word);
-      return;
-    }
+function letterCombinations(digits) {
+  if (!digits.length) return [];
 
-    const int = parseInt(digits[letterIndex]);
-    const chars = letters[int];
-    for(let i = 0; i < chars.length; i++) {
-      word += chars[i];
-      traverse(letterIndex + 1);
-      word = word.substr(0, word.length -1);
+  const letters = [
+    null,
+    null,
+    ["a","b","c"],
+    ["d","e","f"],
+    ["g","h","i"],
+    ["j","k","l"],
+    ["m","n","o"],
+    ["p","q","r","s"],
+    ["t","u","v"],
+    ["w","x","y","z"]
+  ];
+
+  const output = [];
+  const queue = [""];
+
+  for (const ch of digits) {
+    const int = parseInt(ch);
+    const currentLetters = letters[int];
+    const length = queue.length;
+
+    for (let i = 0; i < length; i++) {
+
+      const currentCombo = queue.shift();
+
+      for (let j = 0; j < currentLetters.length; j++) {
+        let newString = currentCombo + currentLetters[j];
+
+        if (newString.length === digits.length) {
+          output.push(newString);
+        } else {
+          queue.push(newString);
+        }
+        
+      }
     }
 
   }
-
-  traverse(0);
-
-  return combinations;
+  
+  return output;
 }
 
 module.exports = {letterCombinations};
