@@ -1,4 +1,4 @@
-const {wallsAndGates, wallsAndGatesDFS} = require('./walls-and-gates');
+const {wallsAndGates, dfs, bfs} = require('./walls-and-gates');
 
 // INF === EMPTY ROOM
 // -1  === WALL
@@ -13,7 +13,8 @@ test("example 1 BFS", () => {
       [Infinity, Infinity, Infinity, -1],
       [Infinity, -1, Infinity, -1],
       [0, -1, Infinity, Infinity]
-    ]
+    ],
+    bfs
   )).toEqual(
     [
       [3, -1, 0, 1],
@@ -26,12 +27,15 @@ test("example 1 BFS", () => {
 
 test("example 2 BFS", () => {
   
-  expect(wallsAndGates([
-    [Infinity, -1, 0, Infinity],
-    [-1, Infinity, Infinity, -1],
-    [Infinity, -1, Infinity, -1],
-    [0, -1, Infinity, Infinity]
-  ])).toEqual(
+  expect(wallsAndGates(
+    [
+      [Infinity, -1, 0, Infinity],
+      [-1, Infinity, Infinity, -1],
+      [Infinity, -1, Infinity, -1],
+      [0, -1, Infinity, Infinity]
+    ],
+    bfs
+  )).toEqual(
     [
       [Infinity, -1, 0, 1],
       [-1, 2, 1, -1],
@@ -42,23 +46,24 @@ test("example 2 BFS", () => {
 });
 
 test("example 3 BFS", () => {
-  expect(wallsAndGates([])).toEqual([]);
+  expect(wallsAndGates([], bfs)).toEqual([]);
 });
 
 test("example 4 BFS", () => {
-  expect(wallsAndGates([[]])).toEqual([[]]);
+  expect(wallsAndGates([[]], bfs)).toEqual([[]]);
 });
 
 
 test("example 1 DFS", () => {
   
-  expect(wallsAndGatesDFS(
+  expect(wallsAndGates(
     [
       [Infinity, -1, 0, Infinity],
       [Infinity, Infinity, Infinity, -1],
       [Infinity, -1, Infinity, -1],
       [0, -1, Infinity, Infinity]
-    ]
+    ],
+    dfs
   )).toEqual(
     [
       [3, -1, 0, 1],
@@ -71,12 +76,15 @@ test("example 1 DFS", () => {
 
 test("example 2 DFS", () => {
   
-  expect(wallsAndGatesDFS([
-    [Infinity, -1, 0, Infinity],
-    [-1, Infinity, Infinity, -1],
-    [Infinity, -1, Infinity, -1],
-    [0, -1, Infinity, Infinity]
-  ])).toEqual(
+  expect(wallsAndGates(
+    [
+      [Infinity, -1, 0, Infinity],
+      [-1, Infinity, Infinity, -1],
+      [Infinity, -1, Infinity, -1],
+      [0, -1, Infinity, Infinity]
+    ],
+    dfs
+  )).toEqual(
     [
       [Infinity, -1, 0, 1],
       [-1, 2, 1, -1],
@@ -87,9 +95,9 @@ test("example 2 DFS", () => {
 });
 
 test("example 3 DFS", () => {
-  expect(wallsAndGatesDFS([])).toEqual([]);
+  expect(wallsAndGates([], dfs)).toEqual([]);
 });
 
 test("example 4 DFS", () => {
-  expect(wallsAndGatesDFS([[]])).toEqual([[]]);
+  expect(wallsAndGates([[]], dfs)).toEqual([[]]);
 });

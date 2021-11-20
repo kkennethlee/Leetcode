@@ -49,21 +49,6 @@ function bfs(grid, coordinate) {
 
 }
 
-function wallsAndGates(grid) {
-  if (!grid.length || !grid[0].length) return grid;
-
-  for (let row = 0; row < grid.length; row++) {
-    for (let col = 0; col < grid[0].length; col++) {
-      if (grid[row][col]  ===  0 ) {
-        bfs(grid, {row, col});
-      }
-    }
-  }
-
-  return grid;
-
-}
-
 function dfs(grid, coordinate) {
   const {row, col} = coordinate;
   if (row < 0 || row > grid.length -1 || col < 0 || col > grid[0].length - 1 || grid[row][col] === -1) {
@@ -96,13 +81,13 @@ function dfs(grid, coordinate) {
 
 }
 
-function wallsAndGatesDFS(grid) {
+function wallsAndGates(grid, callback) {
   if (!grid.length || !grid[0].length) return grid;
 
   for (let row = 0; row < grid.length; row++) {
     for (let col = 0; col < grid[0].length; col++) {
       if (grid[row][col]  ===  0 ) {
-        dfs(grid, {row, col});
+        callback(grid, {row, col});
       }
     }
   }
@@ -112,4 +97,4 @@ function wallsAndGatesDFS(grid) {
 }
 
 
-module.exports = {wallsAndGates, wallsAndGatesDFS}
+module.exports = {wallsAndGates, dfs, bfs};
