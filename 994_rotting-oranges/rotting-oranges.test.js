@@ -2,7 +2,12 @@ const {orangesRotting} = require('./rotting-oranges');
 
 test("example 1", () => {
   
-  expect(orangesRotting([[2,1,1],[1,1,0],[0,1,1]])).toEqual(4);
+  expect(orangesRotting(
+    [
+      [2,1,1],
+      [1,1,0],
+      [0,1,1]
+    ])).toEqual(4);
 });
 
 test("example 2", () => {
@@ -44,4 +49,14 @@ test("example 5", () => {
 test("example 6", () => {
   
   expect(orangesRotting([[], []])).toEqual(0);
+});
+
+test("example 7", () => {
+  
+  expect(orangesRotting([
+    [2,2],
+    [1,1],
+    [0,0],
+    [2,0]
+  ])).toEqual(1);
 });
