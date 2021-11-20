@@ -64,4 +64,52 @@ function wallsAndGates(grid) {
 
 }
 
-module.exports = {wallsAndGates}
+function dfs(grid, coordinate) {
+  const {row, col} = coordinate;
+  if (row < 0 || row > grid.length -1 || col < 0 || col > grid[0].length - 1 || grid[row][col] === -1) {
+    return;
+  }
+
+  // search up
+  if (row > 0 && grid[row-1][col] > 0 && grid[row][col] + 1 < grid[row - 1][col]) {
+    grid[row - 1][col] = grid[row][col] + 1;
+    dfs(grid, {row: row - 1, col});
+  }
+
+  // search right
+  if (col < grid[0].length - 1 && grid[row][col + 1] > 0 && grid[row][col] + 1 < grid[row][col + 1]) {
+    grid[row][col + 1] = grid[row][col] + 1;
+    dfs(grid, {row, col: col + 1});
+  }
+
+  // search down
+  if (row < grid.length - 1 && grid[row + 1][col] > 0 && grid[row][col] + 1 < grid[row + 1][col]) {
+    grid[row + 1][col] = grid[row][col] + 1;
+    dfs(grid, {row: row + 1, col});
+  }
+
+  // search left
+  if (col > 0 && grid[row][col - 1] > 0 && grid[row][col] + 1 < grid[row][col - 1]) {
+    grid[row][col - 1] = grid[row][col] + 1;
+    dfs(grid, {row, col: col - 1});
+  }
+
+}
+
+function wallsAndGatesDFS(grid) {
+  if (!grid.length || !grid[0].length) return grid;
+
+  for (let row = 0; row < grid.length; row++) {
+    for (let col = 0; col < grid[0].length; col++) {
+      if (grid[row][col]  ===  0 ) {
+        dfs(grid, {row, col});
+      }
+    }
+  }
+
+  return grid;
+
+}
+
+
+module.exports = {wallsAndGates, wallsAndGatesDFS}
