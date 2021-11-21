@@ -1,11 +1,11 @@
 /*
-https://leetcode.com/problems/course-schedule/
+#207 https://leetcode.com/problems/course-schedule/ (verified)
 */
 
 /*
-Solved using Graph adjacency list
+Solved using Graph adjacency list, BFS and DFS
 
-Time: O(N + N^2) -> O(N^2)
+Time: O(N + N^3) -> O(N^3)
 Space: O(2N)     -> O(N)
 */
 function createGraphAdjacencyList(prerequisites) {
@@ -13,7 +13,7 @@ function createGraphAdjacencyList(prerequisites) {
 
   //Time: O(N): N: number of classes
   //Space: O(N)
-  prerequisites.forEach((item, index) => {
+  prerequisites.forEach((item) => {
     let first = item.shift();
     if(!graph[first]) {
       graph[first] = [];
@@ -24,36 +24,70 @@ function createGraphAdjacencyList(prerequisites) {
   return graph;
 }
 
-/*
-{
-  1: [0],
-  0: [1],
-}
-*/
+function isCycleDFS(graph, visited, startNode, currentNode = startNode) {
 
-function hasCycle(graph, visited, node, courses) { //node: 1 courses: 1: -> node: 0 courses: 2 -> node: 1 course: 3
-  if(!visited.hasOwnProperty(node)) {
-    visited[node] = true; //{1: true, 0: true }
-  } else {
-    return true
+  const courses = graph[currentNode];
+  visited[currentNode] = true;
+
+  if (courses && courses.length) {
+  
+    for (const course of courses) {
+      if (course === startNode) return true;
+
+      if (!visited[course]) {
+
+        if (isCycleDFS(graph, visited, startNode, course)) {
+          return true;
+        }
+
+      }
+
+      visited[course] = false;
+      
+    }
+
   }
+  
+  return false;
+}
 
-  let prereqs = graph[node]; //[1]
-  if(prereqs) {
-    for(let i = 0; i < prereqs.length; i++) {
-      return hasCycle(graph, visited, prereqs[i], courses + 1);
+function isCycleBFS(graph, visited, startNode) {
+
+  const queue = [...graph[startNode]];
+  
+  while (queue.length) {
+    const size = queue.length;
+    for (let i = 0; i < size; i++) {
+      const currentNode = queue.shift();
+      if (currentNode === startNode) return true;
+
+      const courses = graph[currentNode];
+      visited[currentNode] = true;
+
+      if (courses && courses.length) {
+
+        for (const course of courses) {
+          
+          if (!visited[course]) {
+            queue.push(course);
+          } 
+        }
+
+      }
+
     }
   }
 
-  return false; 
+  return false;
 }
 
-function canFinish(numCourses, prerequisites) {
+function canFinish(numCourses, prerequisites, callback) {
   const graph = createGraphAdjacencyList(prerequisites);
 
   for(let key in graph) {
-    const visited = {};
-    if(hasCycle(graph, visited, key, 1)){
+    const visited = [];
+    key = parseInt(key);
+    if(callback(graph, visited, key)){
       return false;
     }
   }
@@ -62,4 +96,4 @@ function canFinish(numCourses, prerequisites) {
 }
 
 
-module.exports = {canFinish};
+module.exports = {canFinish, isCycleBFS, isCycleDFS};
