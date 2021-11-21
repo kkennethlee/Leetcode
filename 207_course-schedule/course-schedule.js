@@ -6,7 +6,7 @@
 Solved using Graph adjacency list, BFS and DFS
 
 Time: O(N + N^3) -> O(N^3)
-Space: O(2N)     -> O(N)
+Space: O(N^2 + 2N)     -> O(N^2) (every node can be connected with every node to represent adjacency list)
 */
 function createGraphAdjacencyList(prerequisites) {
   const graph = {};
