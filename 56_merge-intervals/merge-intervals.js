@@ -1,8 +1,8 @@
 
 /*
-https://leetcode.com/problems/merge-intervals/
+#56 https://leetcode.com/problems/merge-intervals
 Time: O(NLog(N) + N) N: number of intervals
-Space: O(1)
+Space: O(N)
 */
 
 function merge(intervals) {
@@ -12,18 +12,23 @@ function merge(intervals) {
 
   let merged = [ intervals[0] ];
 
-  for(let i = 1; i < intervals.length; i++) {
+  for (let i = 1; i < intervals.length; i++) {
 
-    const currentOpening = intervals[i][0];
-    const currentClosing = intervals[i][1];
+    // is mergeable
+    let latestMerged = merged[merged.length - 1];
+    let current = intervals[i];
 
-    //completely separate
-    if( currentOpening > merged[merged.length-1][1] ) {
-      merged.push( [currentOpening, currentClosing] );
-    //merge
-    } else if( currentClosing > merged[merged.length-1][1] ) {
-      merged[merged.length-1][1] = currentClosing;
+    if (latestMerged[1] >= current[0]) {
+      merged.pop();
+      merged.push([
+        latestMerged[0], 
+        Math.max(latestMerged[1], current[1])
+      ]); 
+    } else {
+      merged.push(current);
     }
+
+
   }
 
   return merged;
